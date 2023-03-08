@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Cadastro</title>
+    </h:head>
+    <h:body>
+        <h:form id="formulario">
+            <p:growl id="growl" showDetail="true" sticky="true" />
+            <h1>Cadastro</h1>
+            <p:panelGrid columns="2" >
+                Nome: <p:inputText value="#{controlePessoa.pessoa.nome}"/>
+                E-mail: <p:inputText value="#{controlePessoa.pessoa.email}"/>
+                Login: <p:inputText value="#{controlePessoa.pessoa.login}"/>
+                Senha: <p:inputText value="#{controlePessoa.pessoa.senha}"/>
+                <p:commandButton value="Cadastrar" action="#{controlePessoa.adicionar()}" update="formulario"/>
+            </p:panelGrid>
+            <h1>Pessoas cadastradas</h1>
+            <p:dataTable var="pes" value="#{controlePessoa.listagem}">
+                <p:column headerText="Nome">
+                    <h:outputText value="#{pes.nome}"/>
+                </p:column>
+                <p:column headerText="E-mail">
+                    <h:outputText value="#{pes.email}"/>
+                </p:column>
+                <p:column headerText="Login">
+                    <h:outputText value="#{pes.login}"/>                    
+                </p:column>
+                <p:column headerText="Senha">
+                    <h:outputText value="#{pes.senha}"/>  
+                </p:column>
+                <p:column headerText="Opções">
+                    <p:commandButton value="Excluir" update="formulario" action="#{controlePessoa.excluir(pes.id)}"/>
+                    <p:commandButton value="Alterar" update="formulario" action="#{controlePessoa.carregar(pes.id)}"/>
+                </p:column>
+                
+            </p:dataTable>
+            </h:form>
+    </h:body>
+</html>
